@@ -7,7 +7,7 @@ import IconsResolver from 'unplugin-icons/resolver';
 import Icons from 'unplugin-icons/vite';
 import Components from 'unplugin-vue-components/vite';
 import { defineConfig } from 'vite';
-import prismjs from 'vite-plugin-prismjs';
+import { prismjsPlugin } from 'vite-plugin-prismjs';
 import WindiCSS from 'vite-plugin-windicss';
 import svgLoader from 'vite-svg-loader';
 
@@ -29,8 +29,8 @@ function externalCSSPlugin() {
   return {
     name: 'external-css',
     transformIndexHtml: {
-      enforce: 'post',
-      transform() {
+      order: 'post',
+      handler() {
         return [
           {
             tag: 'link',
@@ -113,7 +113,7 @@ export default defineConfig({
     }),
     externalCSSPlugin(),
     woodpeckerInfoPlugin(),
-    prismjs({
+    prismjsPlugin({
       languages: ['yaml'],
     }),
   ],
